@@ -155,6 +155,7 @@ canvas{max-width:100%;max-height:100%;display:block}
 <div id="p-photos" class="page">
   <div class="ph"><div class="pht">PHOTOS</div><button class="btn btn-s" onclick="tu()" style="width:auto;padding:8px 14px;font-size:0.8rem">UPLOAD</button></div>
   <div class="sc">
+    <div class="cb" id="pconfig" style="display:none"><strong>SHARING DISABLED</strong><br>To share photos across users, set CONFIG.photosBinId & CONFIG.masterKey in the code.<br>Get free JSONBin at <a href="https://jsonbin.io" target="_blank">jsonbin.io</a></div>
     <div class="uhb" id="uhb" style="display:none"><div class="ic">FIRE</div><div class="tx"><div class="tl">HOT UPLOADS</div><div class="cn" id="hcn">0</div><div class="sb">sorted by likes</div></div></div>
     <div class="ptab" id="ptabs"></div>
     <div class="cd" id="cdesc"></div>
@@ -165,7 +166,9 @@ canvas{max-width:100%;max-height:100%;display:block}
 
 <div id="p-notes" class="page">
   <div class="ph"><div class="pht">ANON NOTES</div><div class="phr" id="nocnt"></div></div>
-  <div class="sc"><div class="nc3"><textarea id="ni" placeholder="Write something... (anonymous, shared)" maxlength="500" oninput="unc()"></textarea><div class="cf"><span class="cc" id="ncc">0/500</span><button class="sb2" onclick="subn()">POST</button></div></div><div id="nlist2"></div></div>
+  <div class="sc">
+    <div class="cb" id="nconfig" style="display:none"><strong>SHARING DISABLED</strong><br>To share notes across users, set CONFIG.notesBinId & CONFIG.masterKey in the code.<br>Get free JSONBin at <a href="https://jsonbin.io" target="_blank">jsonbin.io</a></div>
+    <div class="nc3"><textarea id="ni" placeholder="Write something... (anonymous, shared)" maxlength="500" oninput="unc()"></textarea><div class="cf"><span class="cc" id="ncc">0/500</span><button class="sb2" onclick="subn()">POST</button></div></div><div id="nlist2"></div></div>
 </div>
 
 <div id="p-games" class="page">
@@ -247,6 +250,7 @@ var NDATA=[{c:'ai',t:'GPT-5 Unveiled: Real-Time Video Understanding, Multimodal 
   {c:'health',t:'Sleep 7-8 Hours: New Study Links It to 40% Lower Dementia Risk',s:'Nature Neuro',i:'photo-1541781774459-bb2af2f05b55',st:'4h ago'}
 ];
 
+var NCUR='ai';
 function rNB(){
   var b=document.getElementById('nbar');
   b.innerHTML='';
@@ -592,6 +596,7 @@ function startGame(id){
   else if(id===8)initDoodle();
 }
 
+function cgm(){closeGame();}
 function closeGame(){document.getElementById('gm').classList.remove('s');clearInterval(gint);gint=null;document.onkeydown=null;}
 
 function init2048(){
@@ -693,4 +698,6 @@ function renderResources(){var resources=[{icon:'\ud83d\udcbb',name:'GitHub',des
 function kf(){var fb=document.getElementById('fb');fb.classList.remove('kf');void fb.offsetWidth;fb.classList.add('kf');var m=parseInt(ll('merit',0))+1;sl('merit',m);document.getElementById('mn').textContent=m;}
 
 loadPhotos();loadNotes();rNB();rNL();renderGames();renderResources();document.getElementById('mn').textContent=ll('merit',0);
+if(!CONFIG.photosBinId){var pc=document.getElementById('pconfig');if(pc)pc.style.display='block';}
+if(!CONFIG.notesBinId){var nc=document.getElementById('nconfig');if(nc)nc.style.display='block';}
 </script></body></html>
